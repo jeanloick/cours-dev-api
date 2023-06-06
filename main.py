@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import FastAPI, Body
+from fastapi import FastAPI, Body, HTTPException, Response, status
 from pydantic import BaseModel
 
 
@@ -31,7 +31,22 @@ async def getGuitars():
               "skip": 0
         }
 @app.post("/guitars")
-async def create_post(payload: Guitar):
+async def create_post(payload: Guitar, response: Response):
     print(payload.guitarName)
     guitarList.append(payload.dict())
+
+    response.status_code = status.HTTP_201_CREATED
     return {"message": f"guitar sucessfully added to the flow of metal and rock and roll, his name is : {payload.guitarBrand +' '+ payload.guitarName}, such a great choice ;)"}
+
+@app.get("/guitars/{guitarId}")
+async def getGutar(guitarId: int, response: Response ):
+    try: 
+        correspondingGuitar = guitarList[guitarId -1]# pck ID begin to 1 and index to 0 
+        return correspondingGuitar 
+    
+    except:
+        raise HTTPException(
+            status.HTTP_404_NOT_FOUND,
+            detail= "Guitar lost in the void T-T"
+        )
+  
