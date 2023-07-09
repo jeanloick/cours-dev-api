@@ -28,7 +28,7 @@ async def get_Guitars(
 
 # Read by id
 @router.get('/{guitar_id}', response_model=schemas_dto.Guitar_GETID_Response)
-async def get_product(guitar_id:int, cursor:Session= Depends(get_cursor)):
+async def get_guitar(guitar_id:int, cursor:Session= Depends(get_cursor)):
     corresponding_guitar = cursor.query(models_orm.Guitars).filter(models_orm.Guitars.id == guitar_id).first()
     if(corresponding_guitar):  
         return corresponding_guitar
@@ -40,8 +40,8 @@ async def get_product(guitar_id:int, cursor:Session= Depends(get_cursor)):
 
 # CREATE / POST 
 @router.post('', status_code=status.HTTP_201_CREATED)
-async def create_product(payload: schemas_dto.Guitar_POST_Body, cursor:Session= Depends(get_cursor)):
-    new_guitar = models_orm.Guitars(name=payload.guitarName, price=payload.guitarPrice) # build the insert
+async def create_guitar(payload: schemas_dto.Guitar_POST_Body, cursor:Session= Depends(get_cursor)):
+    new_guitar = models_orm.Guitars(name=payload.guitarName,brand=payload.guitarBrand,type=payload.guitarType,color=payload.guitarColor, price=payload.guitarPrice, avaibility= payload.avaibility) # build the insert
     cursor.add(new_guitar) # Send the query
     cursor.commit() #Save the staged change
     cursor.refresh(new_guitar)
@@ -56,7 +56,7 @@ async def delete_guitar(guitar_id:int, cursor:Session=Depends(get_cursor)):
         # Continue to delete
         corresponding_guitar.delete() # supprime
         cursor.commit() # commit the stated changes (changement latent)
-        return {"message": f"Guitar succes... sucessfully destroy .... why?"}
+        return {"message": "Guitar succes... sucessfully destroy .... why?"}
     else: 
         raise HTTPException (
             status_code=status.HTTP_404_NOT_FOUND,
