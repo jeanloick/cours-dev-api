@@ -35,7 +35,7 @@ async def get_product(guitar_id:int, cursor:Session= Depends(get_cursor)):
     else:
         raise HTTPException (
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"No corresponding product found with id : {guitar_id}"
+            detail=f"Guitar not found with id: {guitar_id}, an another guitar lost into the void..."
         )
 
 # CREATE / POST 
@@ -45,7 +45,7 @@ async def create_product(payload: schemas_dto.Guitar_POST_Body, cursor:Session= 
     cursor.add(new_guitar) # Send the query
     cursor.commit() #Save the staged change
     cursor.refresh(new_guitar)
-    return {"message" : f"New watch {new_guitar.name} added sucessfully with id: {new_guitar.id}"} 
+    return {"message" : f"Guitar sucessfully added to the flow of metal and rock and roll, his name is : {new_guitar.name +' '+ new_guitar.id}, such a great choice ;)"} 
 
 # DELETE ? 
 @router.delete('/{guitar_id}', status_code=status.HTTP_204_NO_CONTENT)
@@ -56,11 +56,11 @@ async def delete_guitar(guitar_id:int, cursor:Session=Depends(get_cursor)):
         # Continue to delete
         corresponding_guitar.delete() # supprime
         cursor.commit() # commit the stated changes (changement latent)
-        return
+        return {"message": f"Guitar succes... sucessfully destroy .... why?"}
     else: 
         raise HTTPException (
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f'Ne corresponding product with id: {guitar_id}'
+            detail=f'Guitar not found with id: {guitar_id}, an another guitar lost into the void...'
         )
 
 # Update
@@ -72,9 +72,9 @@ async def update_guitar(guitar_id: int, payload:schemas_dto.Guitar_PATCH_Body, c
         # mise à jour (quoi avec quelle valeur ?) Body -> DTO
         corresponding_guitar.update({'featured':payload.newFeatured})
         cursor.commit()
-        return corresponding_guitar.first()
+        return corresponding_guitar.first() 
     else: 
         raise HTTPException (
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f'Ne corresponding product with id: {guitar_id}'
+            detail=f'Guitar not found with id: {guitar_id}, an another guitar lost into the void...'
         )

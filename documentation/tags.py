@@ -2,7 +2,7 @@
 tags_metadata = [
     {
         "name": "Guitars",
-        "description": "Manage Products. So _fancy_ they have their own docs.",
+        "description": "Forge, refine and sell Guitars, the only way to bring more light into this shady world, and there are a doc !!",
         "externalDocs": {
             "description": "Items external docs",
             "url": "https://fastapi.tiangolo.com/",
