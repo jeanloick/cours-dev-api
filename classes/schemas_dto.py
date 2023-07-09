@@ -5,17 +5,17 @@ from pydantic import BaseModel
 # Représente la structure de la données (data type) en entrée ou en sortie de notre API.
 
 class Guitar_POST_Body (BaseModel):
-    productName: str
-    productPrice: float
+    guitarName: str
+    guitarPrice: float
 
 class Guitar_PATCH_Body (BaseModel):
-    newFeatured: bool
+    newAvaibility: bool
 
 class Guitar_GETID_Response(BaseModel): # format de sortie (response)
     id: int
     name: str
     price: str
-    featured: bool
+    availibility: bool
     class Config: # Lors des réponses, nous avons souvant à utiliser les données sortie de notre database. La Config ORM nous permet de "choisir" les columnes à montrer. 
         orm_mode= True
 
