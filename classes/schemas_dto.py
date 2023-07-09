@@ -10,7 +10,7 @@ class Guitar_POST_Body (BaseModel):
     guitarType: str
     guitarColor: str
     guitarPrice: float
-    avaibility: bool
+    guitarAvaibility: bool
 
 
 class Guitar_PATCH_Body (BaseModel):

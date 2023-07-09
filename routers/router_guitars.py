@@ -41,11 +41,11 @@ async def get_guitar(guitar_id:int, cursor:Session= Depends(get_cursor)):
 # CREATE / POST 
 @router.post('', status_code=status.HTTP_201_CREATED)
 async def create_guitar(payload: schemas_dto.Guitar_POST_Body, cursor:Session= Depends(get_cursor)):
-    new_guitar = models_orm.Guitars(name=payload.guitarName,brand=payload.guitarBrand,type=payload.guitarType,color=payload.guitarColor, price=payload.guitarPrice, avaibility= payload.avaibility) # build the insert
+    new_guitar = models_orm.Guitars(name=payload.guitarName,brand=payload.guitarBrand,type=payload.guitarType,color=payload.guitarColor, price=payload.guitarPrice,availibility= payload.guitarAvaibility) # build the insert
     cursor.add(new_guitar) # Send the query
     cursor.commit() #Save the staged change
     cursor.refresh(new_guitar)
-    return {"message" : f"Guitar sucessfully added to the flow of metal and rock and roll, his name is : {new_guitar.name +' '+ new_guitar.id}, such a great choice ;)"} 
+    return {"message" : f"Guitar sucessfully added to the flow of metal and rock and roll, his name is : {new_guitar.name} {new_guitar.id}, such a great choice ;)"} 
 
 # DELETE ? 
 @router.delete('/{guitar_id}', status_code=status.HTTP_204_NO_CONTENT)
