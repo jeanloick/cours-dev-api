@@ -45,7 +45,7 @@ async def create_guitar(payload: schemas_dto.Guitar_POST_Body, cursor:Session= D
     cursor.add(new_guitar) # Send the query
     cursor.commit() #Save the staged change
     cursor.refresh(new_guitar)
-    return {"message" : f"Guitar sucessfully added to the flow of metal and rock and roll, his name is : {new_guitar.name} with the id : {new_guitar.id}, such a great choice ;)"} 
+    return {"message" : f"Guitar sucessfully added to the flow of metal and rock and roll, his name is : the {new_guitar.brand} {new_guitar.name} with the id : {new_guitar.id}, such a great choice ;)"} 
 
 # DELETE ? 
 @router.delete('/{guitar_id}', status_code=status.HTTP_204_NO_CONTENT)
