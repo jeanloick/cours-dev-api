@@ -28,8 +28,6 @@ async def list_transactions(
         all_transactions = cursor.query(models_orm.Transactions).filter(models_orm.Transactions.customer_id == decoded_customer_id).all()
         return all_transactions # data format à ajuster cela besoin
 
-# Exercice : get all transactions
-# DTO pour récupérer le product_id car le customer_id est déjà dans le JWToken
 class transaction_post(BaseModel):
     guitar_id:int
 
