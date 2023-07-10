@@ -31,7 +31,7 @@ async def list_transactions(
 # Exercice : get all transactions
 # DTO pour récupérer le product_id car le customer_id est déjà dans le JWToken
 class transaction_post(BaseModel):
-    product_id:int
+    guitar_id:int
 
 @router.post('', status_code=status.HTTP_201_CREATED)
 async def create_transaction(
@@ -40,7 +40,7 @@ async def create_transaction(
     cursor: Session = Depends(get_cursor)
     ):
     decoded_customer_id = utilities.decode_token(token)
-    new_transaction= models_orm.Transactions(customer_id=decoded_customer_id, product_id=payload.product_id)
+    new_transaction= models_orm.Transactions(customer_id=decoded_customer_id, guitar_id=payload.guitar_id)
     try : 
         cursor.add(new_transaction)
         cursor.commit()
