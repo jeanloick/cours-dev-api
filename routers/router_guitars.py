@@ -56,7 +56,7 @@ async def delete_guitar(guitar_id:int, cursor:Session=Depends(get_cursor)):
         # Continue to delete
         corresponding_guitar.delete() # supprime
         cursor.commit() # commit the stated changes (changement latent)
-        return {"message": "Guitar succes... sucessfully destroy .... why?"}
+        return 
     else: 
         raise HTTPException (
             status_code=status.HTTP_404_NOT_FOUND,

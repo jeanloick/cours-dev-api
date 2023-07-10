@@ -39,7 +39,7 @@ async def get_all_customers(cursor: Session = Depends(database.get_cursor)):
     all_customers = cursor.query(models_orm.Customers).all()
     return all_customers
 
-# Exercice not an actual use case
+
 @router.get('/{customer_id}', response_model=schemas_dto.Customer_response)
 async def get_user_by_id(customer_id:int, cursor: Session = Depends(database.get_cursor)):
     corresponding_customer = cursor.query(models_orm.Customers).filter(models_orm.Customers.id == customer_id).first()
@@ -48,5 +48,5 @@ async def get_user_by_id(customer_id:int, cursor: Session = Depends(database.get
     else:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail=f'No user with id:{customer_id}'
+            detail=f'No user with id:{customer_id}, customer is lost into NightCity T-T'
         )
