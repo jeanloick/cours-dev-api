@@ -1,6 +1,6 @@
 # API Description
 api_description = """
-Watch API helps you do awesome stuff. 🚀
+Guitars API helps you do awesome stuff. 🚀
 
 ## Guitars
 
